@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Arc",
+    "score": 95,
+    "difficulty": "Medium",
+    "time_required": "20 min/day"
+  },
+  {
+    "name": "0G",
+    "score": 92,
+    "difficulty": "Easy",
+    "time_required": "15 min/day"
+  },
+  {
+    "name": "Monad",
+    "score": 90,
+    "difficulty": "Easy",
+    "time_required": "10 min/day"
+  },
+  {
+    "name": "Initia",
+    "score": 85,
+    "difficulty": "Medium",
+    "time_required": "25 min/day"
+  }
+]
