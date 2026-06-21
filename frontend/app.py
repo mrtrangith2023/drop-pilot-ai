@@ -2,11 +2,165 @@ import requests
 import streamlit as st
 import pandas as pd
 
+
+API_BASE_URL = "http://127.0.0.1:8000"
+
+
 st.set_page_config(
     page_title="DropPilot AI",
     page_icon="🚀",
     layout="wide"
 )
+
+
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        .hero {
+            padding: 1.25rem 0 1.75rem;
+        }
+
+        .hero h1 {
+            margin-bottom: 0.25rem;
+        }
+
+        .hero p {
+            color: #64748b;
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+            padding: 1rem;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            color: #0f172a;
+            font-size: 2rem;
+            font-weight: 750;
+            line-height: 1;
+        }
+
+        .tier-badge {
+            border-radius: 999px;
+            display: inline-block;
+            font-weight: 700;
+            margin: 0.35rem 0 0.75rem;
+            padding: 0.35rem 0.8rem;
+        }
+
+        .tier-legendary,
+        .tier-elite {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tier-advanced {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .tier-active {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tier-beginner {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .insight-box,
+        .project-card,
+        .report-box {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .project-card {
+            margin-bottom: 0.75rem;
+        }
+
+        .project-name {
+            color: #0f172a;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .project-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .report-box {
+            line-height: 1.65;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
+def render_metric_card(label, value):
+    st.markdown(
+        f"""
+        <div class="metric-card">
+            <div class="metric-label">{label}</div>
+            <div class="metric-value">{value}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+def tier_class(tier):
+    return {
+        "Legendary Farmer": "tier-legendary",
+        "Elite Farmer": "tier-elite",
+        "Advanced Farmer": "tier-advanced",
+        "Active Farmer": "tier-active",
+    }.get(tier, "tier-beginner")
+
+
+def tier_icon(tier):
+    return {
+        "Legendary Farmer": "👑",
+        "Elite Farmer": "🏆",
+        "Advanced Farmer": "🚀",
+        "Active Farmer": "⚡",
+    }.get(tier, "🌱")
+
+
+def render_tier_badge(tier):
+    st.markdown(
+        f"""
+        <span class="tier-badge {tier_class(tier)}">
+            {tier_icon(tier)} Wallet Tier: {tier}
+        </span>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 # =====================
 # SIDEBAR
@@ -60,28 +214,52 @@ with st.sidebar:
     Strategy Report
     """)
 
+
 # =====================
 # MAIN PAGE
 # =====================
 
-st.title("🚀 DropPilot AI")
-
-wallet = st.text_input(
-    "Wallet Address"
+st.markdown(
+    """
+    <div class="hero">
+        <h1>🚀 DropPilot AI</h1>
+        <p>Analyze wallet readiness, prioritize airdrop opportunities, and generate an AI farming strategy.</p>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
+
+wallet_col, button_col = st.columns([4, 1])
+
+with wallet_col:
+    wallet = st.text_input(
+        "Wallet Address",
+        placeholder="Enter an EVM wallet address"
+    )
+
+with button_col:
+    st.write("")
+    st.write("")
+    analyze_clicked = st.button(
+        "Analyze",
+        use_container_width=True
+    )
+
 
 # =====================
 # ANALYZE
 # =====================
 
-if st.button("Analyze"):
+if analyze_clicked:
 
     try:
 
-        response = requests.post(
-            "http://127.0.0.1:8000/analyze",
-            json={"wallet": wallet}
-        )
+        with st.spinner("Analyzing wallet activity..."):
+
+            response = requests.post(
+                f"{API_BASE_URL}/analyze",
+                json={"wallet": wallet}
+            )
 
         if response.status_code == 200:
 
@@ -99,6 +277,7 @@ if st.button("Analyze"):
 
         st.error(str(e))
 
+
 # =====================
 # SHOW RESULT
 # =====================
@@ -110,78 +289,69 @@ if "result" in st.session_state:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric(
+        render_metric_card(
             "Wallet Score",
             result["wallet_score"]
         )
 
     with col2:
-        st.metric(
+        render_metric_card(
             "Activity",
             result["activity_score"]
         )
 
     with col3:
-        st.metric(
+        render_metric_card(
             "Tx Count",
             result["tx_count"]
         )
 
-    st.write(
-        f"Sybil Risk: {result['sybil_risk']}"
-    )
-
-    st.markdown("---")
+    st.write("")
 
     tier = result["wallet_tier"]
 
-    if tier == "Legendary Farmer":
+    render_tier_badge(tier)
 
-        st.success(
-            f"👑 Wallet Tier: {tier}"
-        )
+    st.caption(
+        f"Sybil Risk: {result['sybil_risk']}"
+    )
 
-    elif tier == "Elite Farmer":
-
-        st.success(
-            f"🏆 Wallet Tier: {tier}"
-        )
-
-    elif tier == "Advanced Farmer":
-
-        st.info(
-            f"🚀 Wallet Tier: {tier}"
-        )
-
-    elif tier == "Active Farmer":
-
-        st.warning(
-            f"⚡ Wallet Tier: {tier}"
-        )
-
-    else:
-
-        st.error(
-            f"🌱 Wallet Tier: {tier}"
-        )
+    st.write("")
 
     st.subheader("📊 Farming Insights")
 
     if result["wallet_score"] >= 80:
 
-        st.write("✅ High Airdrop Potential")
-        st.write("✅ Low Sybil Risk")
-        st.write("✅ Strong Wallet Activity")
+        insights = [
+            "✅ High Airdrop Potential",
+            "✅ Low Sybil Risk",
+            "✅ Strong Wallet Activity"
+        ]
 
     elif result["wallet_score"] >= 60:
 
-        st.write("⚡ Moderate Airdrop Potential")
-        st.write("⚡ Needs More Activity")
+        insights = [
+            "⚡ Moderate Airdrop Potential",
+            "⚡ Needs More Activity"
+        ]
 
     else:
 
-        st.write("⚠️ Increase Wallet Usage")
-        st.write("⚠️ Build More On-chain History")
+        insights = [
+            "⚠️ Increase Wallet Usage",
+            "⚠️ Build More On-chain History"
+        ]
+
+    st.markdown(
+        f"""
+        <div class="insight-box">
+            {"<br>".join(insights)}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.write("")
 
     st.subheader("📈 Wallet Growth Projection")
 
@@ -204,22 +374,43 @@ if "result" in st.session_state:
 
     st.line_chart(chart_data)
 
+
 # =====================
 # PROJECTS
 # =====================
 
+st.write("")
+
 st.subheader("🔥 Recommended Projects")
 
-recommendations = requests.get(
-    "http://127.0.0.1:8000/recommend"
-).json()
+try:
+
+    recommendations = requests.get(
+        f"{API_BASE_URL}/recommend"
+    ).json()
+
+except Exception as e:
+
+    recommendations = []
+    st.error(str(e))
 
 for project in recommendations:
 
-    st.write(
-        f"✅ {project['name']} "
-        f"(Score: {project['score']})"
+    difficulty = project.get("difficulty", "Unknown")
+    time_required = project.get("time_required", "Unknown")
+
+    st.markdown(
+        f"""
+        <div class="project-card">
+            <div class="project-name">✅ {project['name']}</div>
+            <div class="project-meta">
+                Score: {project['score']} · Difficulty: {difficulty} · Time: {time_required}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
+
 
 # =====================
 # AI STRATEGY
@@ -237,7 +428,7 @@ if (
     ):
 
         response = requests.post(
-            "http://127.0.0.1:8000/strategy",
+            f"{API_BASE_URL}/strategy",
             json=result
         )
 
@@ -245,16 +436,28 @@ if (
 
             st.session_state["strategy"] = response.json()
 
-            if "strategy" in st.session_state:
-
-                st.subheader("🧠 AI Strategy Report")
-
-                st.markdown(
-                    st.session_state["strategy"]["strategy"]
-                )
-
         else:
 
             st.error(
                 response.text
             )
+
+if "strategy" in st.session_state:
+
+    st.write("")
+
+    st.subheader("🧠 AI Strategy Report")
+
+    st.markdown(
+        '<div class="report-box">',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        st.session_state["strategy"]["strategy"]
+    )
+
+    st.markdown(
+        "</div>",
+        unsafe_allow_html=True
+    )
