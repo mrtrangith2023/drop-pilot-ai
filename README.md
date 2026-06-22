@@ -189,19 +189,19 @@ Results are displayed in the dashboard.
 
 ### Dashboard Overview
 
-![Dashboard](docs/screenshots/dashboard.PNG)
+![Dashboard](docs/screenshots/dashboard.png)
 
 ### Wallet Analysis
 
-![Wallet Analysis](docs/screenshots/wallet-analysis.PNG)
+![Wallet Analysis](docs/screenshots/wallet-analysis.png)
 
 ### Recommended Projects
 
-![Recommendations](docs/screenshots/recommendations.PNG)
+![Recommendations](docs/screenshots/recommendations.png)
 
 ### AI Strategy Report
 
-![Strategy Report](docs/screenshots/strategy-report.PNG)
+![Strategy Report](docs/screenshots/strategy-report.png)
 
 ---
 
