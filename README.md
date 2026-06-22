@@ -1,113 +1,292 @@
-# DropPilot AI
+# 🚀 DropPilot AI
 
-DropPilot AI is an AI-powered dashboard for airdrop hunters and testnet farmers. It analyzes a wallet profile, estimates farming readiness, recommends high-value ecosystems, and generates a concise action plan using an AI strategy agent.
+## AI-Powered Airdrop Intelligence for Smarter Farming
+
+DropPilot AI is an AI-powered assistant designed for airdrop hunters and testnet farmers.
+
+Instead of blindly farming dozens of ecosystems, users can analyze wallet quality, evaluate farming readiness, discover high-potential opportunities, and receive AI-generated action plans tailored to their activity.
 
 Built for the **0G Labs Vibe Coding Tournament**.
 
-## Problem
+---
 
-Airdrop hunters often waste time farming low-signal projects, repeating generic tasks, and guessing which ecosystems deserve attention. It is difficult to quickly understand whether a wallet looks active, trustworthy, and ready for potential future reward campaigns.
+## 🎯 Problem
 
-## Solution
+Airdrop farming has become increasingly complex.
 
-DropPilot AI turns wallet activity into a simple farming intelligence report. The app scores the wallet, assigns a farmer tier, highlights Sybil-risk signals, recommends projects, and generates a weekly AI strategy so users can focus their time on better opportunities.
+Users spend hours navigating wallets, dashboards, quests, Discord communities, and testnet campaigns without knowing:
 
-## Features
+* Is my wallet strong enough for future rewards?
+* Am I wasting time on low-value opportunities?
+* Which ecosystems deserve my attention?
+* What actions should I take next?
 
-- **Wallet Analyzer**: Scores wallet readiness using activity, wallet age, and transaction count signals.
-- **Wallet Tier System**: Classifies users as Beginner, Active, Advanced, Elite, or Legendary farmers.
-- **Sybil Risk Indicator**: Gives a quick view of wallet quality and risk level.
-- **Growth Projection**: Visualizes wallet score progression in a simple dashboard chart.
-- **Project Recommendations**: Ranks recommended ecosystems by opportunity score.
-- **AI Strategy Generator**: Produces a markdown strategy report with wallet assessment, top opportunities, weekly actions, airdrop outlook, and risk analysis.
-- **Streamlit Dashboard**: Provides a lightweight and judge-friendly user interface for the hackathon demo.
+Most users rely on guesswork rather than data-driven decisions.
 
-## Architecture
+---
+
+## 💡 Solution
+
+DropPilot AI transforms wallet activity into actionable farming intelligence.
+
+The platform analyzes wallet behavior, evaluates farming readiness, identifies potential risks, recommends promising ecosystems, and generates personalized AI strategies using Gemini.
+
+Instead of manually researching every project, users receive a structured plan that helps them focus on higher-value opportunities.
+
+---
+
+## ✨ Key Features
+
+### 🔍 Wallet Analyzer
+
+Analyze wallet activity and estimate farming readiness using:
+
+* Activity Score
+* Transaction Count
+* Wallet Age
+* Wallet Score
+* Sybil Risk Assessment
+
+---
+
+### 🏆 Wallet Tier System
+
+Classify wallets into farming tiers:
+
+* Beginner Farmer
+* Active Farmer
+* Advanced Farmer
+* Elite Farmer
+* Legendary Farmer
+
+This helps users quickly understand their current farming profile.
+
+---
+
+### 📊 Farming Insights
+
+Convert raw blockchain metrics into easy-to-understand insights:
+
+* High Airdrop Potential
+* Moderate Airdrop Potential
+* Wallet Improvement Suggestions
+* Farming Readiness Evaluation
+
+---
+
+### 📈 Wallet Growth Projection
+
+Visualize wallet score progression using dashboard charts.
+
+Provides a simple representation of wallet growth and readiness.
+
+---
+
+### 🔥 Opportunity Recommendations
+
+Recommend promising ecosystems based on farming opportunities.
+
+Current recommendations include:
+
+* Arc
+* 0G
+* Monad
+
+Each project includes:
+
+* Opportunity Score
+* Difficulty Level
+* Time Commitment
+
+---
+
+### 🤖 Gemini AI Strategy Engine
+
+Generate a personalized farming strategy using Gemini AI.
+
+The report includes:
+
+* Wallet Assessment
+* Top Opportunities
+* Weekly Action Plan
+* Potential Airdrop Outlook
+* Risk Analysis
+
+---
+
+### 🖥 Streamlit Dashboard
+
+Simple and intuitive interface designed for:
+
+* Hackathon judges
+* Airdrop hunters
+* Testnet farmers
+
+---
+
+## 🏗 Architecture
 
 ```text
 User
-  |
-  v
+  │
+  ▼
 Streamlit Frontend
-  |
-  v
+  │
+  ▼
 FastAPI Backend
-  |
-  +--> Wallet Analyzer Service
-  |
-  +--> Recommendation Service
-  |
-  +--> AI Strategy Service
-            |
-            v
-        Gemini AI
+  │
+  ├── Wallet Analyzer Service
+  │
+  ├── Recommendation Service
+  │
+  └── AI Strategy Service
+            │
+            ▼
+         Gemini AI
 ```
 
-## AI Workflow
+---
 
-1. The user enters a wallet address in the Streamlit dashboard.
-2. The frontend sends the wallet to the FastAPI `/analyze` endpoint.
-3. The backend generates a wallet profile with score, tier, transaction count, activity score, wallet age, and Sybil risk.
-4. The dashboard displays the analysis and fetches recommended projects from `/recommend`.
-5. When the user clicks **Generate AI Strategy**, the frontend sends the wallet analysis to `/strategy`.
-6. The AI service sends a structured prompt to Gemini.
-7. Gemini returns a concise farming strategy report for the user.
+## 🔄 AI Workflow
 
-## Screenshots
+### Step 1
 
-Add screenshots or demo GIFs here before submitting:
+User enters a wallet address.
 
-- Dashboard overview
-- Wallet analysis cards
-- Recommended projects
-- AI strategy report
+### Step 2
+
+The Streamlit dashboard sends the wallet to the FastAPI backend.
+
+### Step 3
+
+The Wallet Analyzer generates:
+
+* Wallet Score
+* Activity Score
+* Transaction Count
+* Wallet Tier
+* Sybil Risk
+
+### Step 4
+
+The Recommendation Engine returns suggested ecosystems.
+
+### Step 5
+
+The AI Strategy Engine sends wallet context to Gemini.
+
+### Step 6
+
+Gemini generates a personalized farming report.
+
+### Step 7
+
+Results are displayed in the dashboard.
+
+---
+
+## 📸 Screenshots
+
+### Dashboard Overview
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Wallet Analysis
+
+![Wallet Analysis](docs/screenshots/wallet-analysis.png)
+
+### Recommended Projects
+
+![Recommendations](docs/screenshots/recommendations.png)
+
+### AI Strategy Report
+
+![Strategy Report](docs/screenshots/strategy-report.png)
+
+---
+
+## 🎬 Demo Video
+
+Demo Video:
 
 ```text
-docs/screenshots/dashboard.png
-docs/screenshots/strategy-report.png
+https://youtu.be/YOUR_VIDEO_LINK
 ```
 
-## Tech Stack
+Replace the link above after uploading the demo video.
 
-- **Frontend**: Streamlit
-- **Backend**: FastAPI
-- **AI Model**: Gemini
-- **Data**: JSON project dataset
-- **Language**: Python
-- **Visualization**: Pandas + Streamlit charts
+---
 
-## Installation
+## 🛠 Tech Stack
 
-Clone the project:
+### Frontend
+
+* Streamlit
+
+### Backend
+
+* FastAPI
+
+### AI
+
+* Gemini AI
+
+### Data
+
+* JSON Dataset
+
+### Language
+
+* Python
+
+### Visualization
+
+* Pandas
+* Streamlit Charts
+
+---
+
+## 🚀 Installation
+
+### Clone Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/YOUR_USERNAME/drop-pilot-ai.git
+
 cd drop-pilot-ai
 ```
 
-Create and activate a virtual environment:
+---
+
+### Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-On Windows:
+Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-On macOS/Linux:
+macOS/Linux:
 
 ```bash
 source venv/bin/activate
 ```
 
-Install dependencies:
+---
+
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+
+---
+
+### Configure Environment Variables
 
 Create a `.env` file:
 
@@ -115,48 +294,92 @@ Create a `.env` file:
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Start the FastAPI backend:
+---
+
+### Start Backend
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-In a second terminal, start the Streamlit frontend:
+---
+
+### Start Frontend
 
 ```bash
 streamlit run frontend/app.py
 ```
 
-Open the app:
+---
+
+### Open Dashboard
 
 ```text
 http://localhost:8501
 ```
 
-## Demo
+---
 
-1. Start the FastAPI backend.
-2. Start the Streamlit dashboard.
-3. Enter a wallet address.
-4. Click **Analyze** to generate the wallet score, tier, risk indicator, insights, and growth projection.
-5. Review the recommended projects.
-6. Click **Generate AI Strategy** to produce the AI-powered farming plan.
+## 🎮 Demo Flow
 
-The current MVP uses simulated wallet scoring logic for fast hackathon demonstration while keeping the service boundaries ready for real on-chain integrations.
+1. Enter a wallet address.
+2. Click Analyze.
+3. Review Wallet Score and Wallet Tier.
+4. Explore Farming Insights.
+5. Review Recommended Projects.
+6. Click Generate AI Strategy.
+7. Receive a personalized farming report generated by Gemini AI.
 
-## Future Roadmap
+---
 
-- Integrate real on-chain wallet activity from block explorers and RPC providers.
-- Add multi-chain wallet analysis across 0G, EVM testnets, and emerging ecosystems.
-- Build a personalized daily farming planner.
-- Add task completion tracking and wallet progress history.
-- Improve Sybil-risk detection with behavioral heuristics.
-- Add project-specific checklists for testnet campaigns.
-- Support user accounts and saved wallet profiles.
-- Deploy the backend and frontend for public demo access.
-- Expand the recommendation engine with live ecosystem data.
-- Add deeper 0G ecosystem analysis and opportunity scoring.
+## 🗺 Future Roadmap
 
-## Status
+### Phase 1
 
-Hackathon MVP built for the **0G Labs Vibe Coding Tournament**.
+* Real wallet activity integration
+* Multi-chain support
+* Historical wallet tracking
+
+### Phase 2
+
+* Daily farming planner
+* Wallet watchlists
+* User accounts
+
+### Phase 3
+
+* Advanced Sybil detection
+* Live ecosystem scoring
+* Personalized opportunity engine
+
+### Phase 4
+
+* 0G ecosystem integrations
+* Public deployment
+* Community leaderboards
+
+---
+
+## 🏁 Hackathon Submission
+
+### Project
+
+DropPilot AI
+
+### Category
+
+AI-Powered Web3 Assistant
+
+### Built For
+
+0G Labs Vibe Coding Tournament
+
+### Core Value
+
+Help users spend less time guessing and more time focusing on high-value opportunities through AI-powered farming intelligence.
+
+---
+
+## 📄 License
+
+MIT License
