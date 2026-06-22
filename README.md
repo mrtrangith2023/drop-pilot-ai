@@ -189,19 +189,19 @@ Results are displayed in the dashboard.
 
 ### Dashboard Overview
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/screenshots/dashboard.PNG)
 
 ### Wallet Analysis
 
-![Wallet Analysis](docs/screenshots/wallet-analysis.png)
+![Wallet Analysis](docs/screenshots/wallet-analysis.PNG)
 
 ### Recommended Projects
 
-![Recommendations](docs/screenshots/recommendations.png)
+![Recommendations](docs/screenshots/recommendations.PNG)
 
 ### AI Strategy Report
 
-![Strategy Report](docs/screenshots/strategy-report.png)
+![Strategy Report](docs/screenshots/strategy-report.PNG)
 
 ---
 
@@ -210,7 +210,7 @@ Results are displayed in the dashboard.
 Demo Video:
 
 ```text
-https://youtu.be/YOUR_VIDEO_LINK
+https://youtu.be/ch8tTs8GIK8
 ```
 
 Replace the link above after uploading the demo video.
