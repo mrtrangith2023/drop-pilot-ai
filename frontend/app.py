@@ -11,9 +11,15 @@ from components.sidebar import render_sidebar
 from components.strategy import render_strategy
 
 
-API_BASE_URL = st.secrets.get(
+# API_BASE_URL = st.secrets.get(
+#     "API_BASE_URL",
+#     "http://127.0.0.1:8000"
+# )
+import os
+
+API_BASE_URL = os.getenv(
     "API_BASE_URL",
-    "http://127.0.0.1:8000"
+    "https://drop-pilot-ai.onrender.com"
 )
 
 
