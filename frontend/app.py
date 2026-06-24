@@ -11,7 +11,10 @@ from components.sidebar import render_sidebar
 from components.strategy import render_strategy
 
 
-API_BASE_URL = "http://127.0.0.1:8000"
+API_BASE_URL = st.secrets.get(
+    "API_BASE_URL",
+    "http://127.0.0.1:8000"
+)
 
 
 st.set_page_config(
@@ -33,7 +36,8 @@ if analyze_clicked:
 
             response = requests.post(
                 f"{API_BASE_URL}/analyze",
-                json={"wallet": wallet}
+                json={"wallet": wallet},
+                timeout=20
             )
 
         if response.status_code == 200:

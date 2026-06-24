@@ -1,15 +1,3 @@
-# from fastapi import APIRouter
-# from app.services.ai_service import AIStrategy
-
-# router = APIRouter()
-
-# @router.post("/strategy")
-# def strategy(data: dict):
-
-#     return {
-#         "strategy":
-#         AIStrategy.generate(data)
-#     }
 from fastapi import APIRouter
 
 from app.services.ai_service import AIStrategy
